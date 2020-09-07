@@ -26,6 +26,12 @@ class SignIn extends Component {
     this.setState({[name]: value})
   }
   
+  signInWithGoogle = (e) => {
+    console.log(e)
+    e.preventDefault();
+    signInWithGoogle();
+  }
+  
   render() {
     return (
       <div className={"sign-in"}>
@@ -49,9 +55,11 @@ class SignIn extends Component {
             handleChange={this.handleChange}
             required
           />
-  
-          <CustomButton type="submit" > Sign in</CustomButton>
-          <CustomButton onClick={() =>signInWithGoogle()} > Sign in with google</CustomButton>
+          <div className="buttons">
+            <CustomButton type="submit" >Sign in</CustomButton>
+            <CustomButton onClick={(e) => this.signInWithGoogle(e)} isGoogleSignIn>Sign in with google</CustomButton>
+          </div>
+        
         </form>
       </div>
     );
