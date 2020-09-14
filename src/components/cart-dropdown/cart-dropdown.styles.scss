@@ -18,6 +18,15 @@
     overflow: scroll;
   }
 
+  .empty-message {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-weight: 500;
+  }
+
   button {
     margin-top: auto;
   }
