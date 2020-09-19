@@ -12,6 +12,7 @@ import {selectCartHidden} from "../../redux/cart/cart.selectors";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 
 const Header = ({currentUser, hidden}) => {
+  console.log(currentUser)
   return (
     <div className={'header'}>
       <Link className={"logo-container"} to={"/"}>
@@ -27,9 +28,11 @@ const Header = ({currentUser, hidden}) => {
         </Link>
         {
           currentUser ?
-            <div className={'option'} onClick={() => auth.signOut()}>
+            <Link className={'option'} to={'/signin'} onClick={() => { //i converted this to a link adn added the to property
+              auth.signOut()
+            }}>
               SIGN OUT
-            </div>
+            </Link>
             :
             <Link className={'option'} to={'/signin'}>
               SIGN IN
@@ -47,7 +50,7 @@ const Header = ({currentUser, hidden}) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentUse: selectCurrentUser,
+  currentUser: selectCurrentUser,
   hidden: selectCartHidden,
 });
 
