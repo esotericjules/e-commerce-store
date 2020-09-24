@@ -16,19 +16,16 @@ console.log(selectCollections)
 
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collections => Object.keys(collections).map(key => {
+  collections =>collections ?  Object.keys(collections).map(key => {
     // console.log(collections[key])
     return collections[key]
-  })
-)
+  }) : []
+);
 
 export const selectCollection = memoize((collectionUrlParam) =>
   createSelector(
     [selectCollections],
-    collections  => {
-      // console.log(collections)
-      return collections[collectionUrlParam]
-    }
+    collections  => (collections ? collections[collectionUrlParam]  : null)
     
   )
 );
