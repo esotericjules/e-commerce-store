@@ -12,7 +12,7 @@ export const selectCollections = createSelector(
   }
 
 )
-console.log(selectCollections)
+// console.log(selectCollections)
 
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
@@ -29,4 +29,14 @@ export const selectCollection = memoize((collectionUrlParam) =>
     
   )
 );
+
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+)
+
+export const selectIsCollectionsLoaded = createSelector(
+  [selectShop],
+  shop => !!shop.collections
+)
 
