@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route} from 'react-router-dom';
 import {connect} from "react-redux";
 
@@ -8,42 +8,12 @@ import CollectionPageContainer from "../collection/collection.container";
 import {fetchCollectionsStart} from "../../redux/shop/shop.actions";
 
 
-class ShopPage extends React.Component {
+const ShopPage = ({match, fetchCollectionsStart}) => {
   
-  componentDidMount() {
-    const {fetchCollectionsStart} = this.props;
-    
+  useEffect(() => {
     fetchCollectionsStart();
-    
-    
-    
-    
-    // const collectionRef = firestore.collection('collections');
-    
-    /* OBSERVABLE PATTERN */
-    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
-    //  const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-    //  // console.log(collectionsMap);
-    //   updateCollections(collectionsMap);
-    //  this.setState({loading: false})
-    // })
-    
-    /* API Call pattern */
-    // fetch("https://firestore.googleapis.com/v1/projects/clothing-store-bdf48/databases/(default)/documents/collections")
-    //   .then(response => response.json())
-    //   .then(collections => console.log(collections))
-    //
-  
-    /* promise pattern */
-    // collectionRef.get().then(snapshot => {
-    //   const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-    //   updateCollections(collectionsMap);
-    //   this.setState({loading: false})
-    // })
-  }
-  
-  render() {
-    const {match} = this.props;
+  }, [fetchCollectionsStart]);
+
     return (
       <div>
         <Route
@@ -57,8 +27,7 @@ class ShopPage extends React.Component {
           />
       </div>
     );
-  }
-}
+  };
 
 const mapDispatchToProps = dispatch => ({
    fetchCollectionsStart: () => dispatch(fetchCollectionsStart())

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {createStructuredSelector} from 'reselect';
 import {Route, Switch, Redirect} from "react-router-dom"
@@ -11,24 +11,14 @@ import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import CheckoutPage from "./pages/checkout/checkout.component";
 
-
-import {checkUserSession, setCurrentUser} from "./redux/user/user.action";
+import {checkUserSession} from "./redux/user/user.action";
 import {selectCurrentUser} from "./redux/user/user.selector";
 
-class App extends React.Component {
-  
-  unsubscribeFromAuth = null;
-
-  componentDidMount = () => {
-     const {checkUserSession} = this.props;
-     checkUserSession();
-  };
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-  
-  render () {
+const App = ({checkUserSession, currentUser}) => {
+   useEffect(() => {
+     checkUserSession()
+   }, [checkUserSession]);
+   
     return (
       <div>
         <Header/>
@@ -36,13 +26,12 @@ class App extends React.Component {
           <Route exact path={'/'} component={HomePage}/>
           <Route path={'/shop'} component={ShopPage}/>
           <Route exact path={'/checkout'} component={CheckoutPage}/>
-          <Route exact path={'/signin'} render={() => this.props.currentUser ?   //I added .userAuth
+          <Route exact path={'/signin'} render={() => currentUser ?   //I added .userAuth
             (<Redirect to={'/'}/> ):
             (<SignInAndSignUpPage/> )}/>
         </Switch>
       </div>
     );
-  }
 }
 
 
