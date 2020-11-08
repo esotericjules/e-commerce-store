@@ -12,6 +12,10 @@
     background-size: cover;
     background-position: center;
     margin-bottom: 5px;
+
+    @media screen and (max-width: 800px) {
+     flex: 0 1 50%;
+    }
   }
 
   .custom-button {
@@ -20,6 +24,13 @@
     position: absolute;
     top: 255px;
     display: none;
+
+    @media screen and (max-width: 800px) {
+      display: block;
+      opacity: 0.9;
+      min-width: unset;
+      padding: 0 10px;
+    }
 
   }
 
@@ -49,4 +60,18 @@
       width: 10%;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+
+    &:hover {
+      .image {
+        opacity: unset;
+      }
+      .custom-button {
+        opacity: unset;
+      }
+    }
+  }
+
 }
